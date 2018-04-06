@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Gestão de alunos</title>
+<title>E.E. Universal</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -52,7 +52,7 @@ tr:nth-child(even) {
 			alunoAtual = new Aluno();
 		}
 	%>
-	<h1>Gestão de alunos E.E. Universal</h1>
+	<h1>Gestão de alunos</h1>
 	<hr />
 	<%
 		if (msg != null) {

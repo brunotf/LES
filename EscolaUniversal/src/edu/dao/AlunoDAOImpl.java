@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import edu.model.Aluno;
 import edu.util.DBUtil;
@@ -29,12 +29,12 @@ public class AlunoDAOImpl implements AlunoDAO {
 	}
 
 	@Override
-	public HashSet<Aluno> pesquisar() throws SQLException {
+	public TreeSet<Aluno> pesquisar() throws SQLException {
 		con = DBUtil.getInstance().getConnection();
 		String sql = "SELECT * FROM aluno";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		HashSet<Aluno> lista = new HashSet<>();
+		TreeSet<Aluno> lista = new TreeSet<>();
 
 		while (rs.next()) {
 			Aluno a = new Aluno();

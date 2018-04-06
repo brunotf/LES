@@ -2,9 +2,7 @@ package edu.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +20,8 @@ import edu.model.Medico;
 @WebServlet("/MedicoController")
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	LinkedHashSet<Medico> listaMedicos;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,12 +49,12 @@ public class MedicoController extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 String txtId = request.getParameter("txtId");
-		 String txtNome = request.getParameter("txtNome");
-		 String txtCRM = request.getParameter("txtCRM");
-		 String txtData = request.getParameter("txtData");
-		 String txtEspecialidade = request.getParameter("txtEspecialidade");
-		 String txtTurno = request.getParameter("txtTurno");
+		String txtId = request.getParameter("txtId");
+		String txtNome = request.getParameter("txtNome");
+		String txtCRM = request.getParameter("txtCRM");
+		String txtData = request.getParameter("txtData");
+		String txtEspecialidade = request.getParameter("txtEspecialidade");
+		String txtTurno = request.getParameter("txtTurno");
 
 		String txtCmd = request.getParameter("cmd");
 
@@ -62,24 +62,13 @@ public class MedicoController extends HttpServlet {
 
 		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		HashSet<Medico> lista = (HashSet<Medico>) getServletContext().getAttribute("LISTA");
-
-		if (lista == null) {
-			lista = new HashSet<>();
-			getServletContext().setAttribute("LISTA", lista);
-		}
-
-		try {
-			long proxId = mDao.proximoId();
-			getServletContext().setAttribute("PROXID", proxId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		listaMedicos = (LinkedHashSet<Medico>) getServletContext().getAttribute("LISTA_MEDICOS");
 
 		String message = null;
-		if ("adicionar".equals(txtCmd)) {
 
+		if ("adicionar".equals(txtCmd)) {
 			Medico m = new Medico();
+
 			m.setId(Long.parseLong(txtId));
 			m.setNome(txtNome);
 			m.setCrm(txtCRM);
@@ -91,23 +80,17 @@ public class MedicoController extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 			message = String.format("Foi cadastrado o médico %s\n", m.toString());
+
 		} else if ("pesquisar".equals(txtCmd)) {
 
 			try {
-				lista = mDao.consultar();
+				listaMedicos = mDao.pesquisar();
+				request.getSession().setAttribute("LISTA_MEDICOS", listaMedicos);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			for (Medico medico : lista) {
-				if (medico.getNome().contains(txtNome)) {
 
-					message = String.format("Foi localizado o médico %s\n", medico.toString());
-					request.getSession().setAttribute("MEDICOATUAL", medico);
-
-				}
-			}
 		} else if ("excluir".equals(txtCmd)) {
 			Medico m = new Medico();
 
@@ -125,7 +108,7 @@ public class MedicoController extends HttpServlet {
 		} else if ("atualizar".equals(txtCmd)) {
 
 			Medico m = new Medico();
-			
+
 			m.setId(Long.parseLong(txtId));
 			m.setNome(txtNome);
 			m.setCrm(txtCRM);
@@ -141,8 +124,6 @@ public class MedicoController extends HttpServlet {
 
 		request.getSession().setAttribute("MESSAGE", message);
 
-		System.out.print(message);
-		System.out.printf("Existem %d elementos na lista\n", lista.size());
 		response.sendRedirect("./medicos.jsp");
 
 	}

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import edu.model.Medico;
 import edu.util.DBUtil;
@@ -27,13 +27,14 @@ public class MedicoDAOImpl implements MedicoDAO {
 		ps.setString(6, m.getTurno());
 		ps.execute();
 		ps.close();
-		
+
 	}
 
 	@Override
 	public void atualizar(Medico m) throws SQLException {
 		con = DBUtil.getInstance().getConnection();
-		String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, turno = ? " + "WHERE id = ?";
+		String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, "
+				+ "turno = ? WHERE id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, m.getNome());
 		ps.setString(2, m.getEspecialidade());
@@ -54,11 +55,14 @@ public class MedicoDAOImpl implements MedicoDAO {
 		ps.close();
 	}
 
-	public HashSet<Medico> consultar() throws SQLException {
+	@Override
+	public LinkedHashSet<Medico> pesquisar() throws SQLException {
 		con = DBUtil.getInstance().getConnection();
-		PreparedStatement pstmt = (PreparedStatement) con.prepareStatement("SELECT * FROM medico");
-		ResultSet rs = pstmt.executeQuery();
-		HashSet<Medico> lista = new HashSet<>();
+		String sql = "SELECT * FROM medico";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		LinkedHashSet<Medico> lista = new LinkedHashSet<>(); 
+
 		while (rs.next()) {
 			Medico m = new Medico();
 			m.setId(rs.getLong("id"));
@@ -67,11 +71,11 @@ public class MedicoDAOImpl implements MedicoDAO {
 			m.setEspecialidade(rs.getString("especialidade"));
 			m.setDtAdmissao(rs.getString("DtAdmissao"));
 			m.setTurno(rs.getString("turno"));
-
+			
 			lista.add(m);
 		}
-
 		return lista;
+		
 	}
 
 	@Override
