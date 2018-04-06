@@ -49,13 +49,12 @@ public class MedicoController extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// String txtId = request.getParameter("txtId");
-		// String txtNome = request.getParameter("txtNome");
-		// String txtCRM = request.getParameter("txtCRM");
-		// String txtData = request.getParameter("txtData");
-		// String txtEspecialidade = request.getParameter("txtEspecialidade");
-		// String txtTurno = request.getParameter("txtTurno");
-		// System.out.println("Apertado botao : " + txtCmd);
+		 String txtId = request.getParameter("txtId");
+		 String txtNome = request.getParameter("txtNome");
+		 String txtCRM = request.getParameter("txtCRM");
+		 String txtData = request.getParameter("txtData");
+		 String txtEspecialidade = request.getParameter("txtEspecialidade");
+		 String txtTurno = request.getParameter("txtTurno");
 
 		String txtCmd = request.getParameter("cmd");
 
@@ -81,12 +80,12 @@ public class MedicoController extends HttpServlet {
 		if ("adicionar".equals(txtCmd)) {
 
 			Medico m = new Medico();
-			m.setId(Long.parseLong(request.getParameter("txtId")));
-			m.setNome(request.getParameter("txtNome"));
-			m.setCrm(request.getParameter("txtCRM"));
-			m.setEspecialidade(request.getParameter("txtEspecialidade"));
-			m.setTurno(request.getParameter("txtTurno"));
-			m.setDtAdmissao(request.getParameter("txtData"));
+			m.setId(Long.parseLong(txtId));
+			m.setNome(txtNome);
+			m.setCrm(txtCRM);
+			m.setEspecialidade(txtEspecialidade);
+			m.setTurno(txtTurno);
+			m.setDtAdmissao(txtData);
 			try {
 				mDao.adicionar(m);
 			} catch (SQLException e) {
@@ -102,7 +101,7 @@ public class MedicoController extends HttpServlet {
 				e.printStackTrace();
 			}
 			for (Medico medico : lista) {
-				if (medico.getNome().contains(request.getParameter("txtNome"))) {
+				if (medico.getNome().contains(txtNome)) {
 
 					message = String.format("Foi localizado o médico %s\n", medico.toString());
 					request.getSession().setAttribute("MEDICOATUAL", medico);
@@ -112,9 +111,9 @@ public class MedicoController extends HttpServlet {
 		} else if ("excluir".equals(txtCmd)) {
 			Medico m = new Medico();
 
-			m.setId(Long.parseLong(request.getParameter("txtId")));
-			m.setNome(request.getParameter("txtNome"));
-			m.setCrm(request.getParameter("txtCRM"));
+			m.setId(Long.parseLong(txtId));
+			m.setNome(txtNome);
+			m.setCrm(txtCRM);
 
 			try {
 				mDao.excluir(m);
@@ -126,12 +125,13 @@ public class MedicoController extends HttpServlet {
 		} else if ("atualizar".equals(txtCmd)) {
 
 			Medico m = new Medico();
-
-			m.setId(Long.parseLong(request.getParameter("txtId")));
-			m.setNome(request.getParameter("txtNome"));
-			m.setEspecialidade(request.getParameter("txtEspecialidade"));
-			m.setTurno(request.getParameter("txtTurno"));
-			m.setDtAdmissao(request.getParameter("txtData"));
+			
+			m.setId(Long.parseLong(txtId));
+			m.setNome(txtNome);
+			m.setCrm(txtCRM);
+			m.setEspecialidade(txtEspecialidade);
+			m.setTurno(txtTurno);
+			m.setDtAdmissao(txtData);
 			try {
 				mDao.atualizar(m);
 			} catch (SQLException e) {
