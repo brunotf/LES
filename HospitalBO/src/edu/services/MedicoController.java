@@ -21,7 +21,6 @@ import edu.model.Medico;
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	LinkedHashSet<Medico> listaMedicos;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,6 +58,8 @@ public class MedicoController extends HttpServlet {
 		String txtCmd = request.getParameter("cmd");
 
 		MedicoDAO mDao = new MedicoDAOImpl();
+		
+		LinkedHashSet<Medico> listaMedicos;
 
 		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
