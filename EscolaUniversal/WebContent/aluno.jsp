@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="edu.model.Aluno, java.util.HashSet "%>
+<%@ page import="edu.model.Aluno, java.util.LinkedHashSet "%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -119,6 +119,10 @@ tr:nth-child(even) {
 						value="adicionar">Adicionar</button>
 					<button class="btn btn-primary" type="submit" name="cmd"
 						value="pesquisar">Pesquisar</button>
+					<button class="btn btn-primary" type="submit" name="cmd"
+						value="atualizar">Atualizar</button>
+					<button class="btn btn-primary" type="submit" name="cmd"
+						value="excluir">Excluir</button>
 				</div>
 			</div>
 
@@ -126,7 +130,7 @@ tr:nth-child(even) {
 	</div>
 
 	<%
-		HashSet<Aluno> listaAlunos = (HashSet<Aluno>) session.getAttribute("LISTA_ALUNOS");
+		LinkedHashSet<Aluno> listaAlunos = (LinkedHashSet<Aluno>) session.getAttribute("LISTA_ALUNOS");
 		session.setAttribute("LISTA_ALUNOS", null);
 		if (listaAlunos != null && listaAlunos.size() > 0) {
 	%>

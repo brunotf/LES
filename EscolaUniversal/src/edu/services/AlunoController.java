@@ -2,7 +2,7 @@ package edu.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.TreeSet;
+import java.util.LinkedHashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +20,6 @@ import edu.model.Aluno;
 @WebServlet("/AlunoController")
 public class AlunoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,8 +58,7 @@ public class AlunoController extends HttpServlet {
 		AlunoDAO aDao = new AlunoDAOImpl();
 
 		String message = null;
-		TreeSet<Aluno> listaAlunos = (TreeSet<Aluno>)
-				getServletContext().getAttribute("LISTA_ALUNOS");
+		LinkedHashSet<Aluno> listaAlunos = (LinkedHashSet<Aluno>) getServletContext().getAttribute("LISTA_ALUNOS");
 
 		if (txtCmd.contains("adicionar")) {
 			Aluno a = new Aluno();
@@ -85,6 +83,34 @@ public class AlunoController extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		} else if (txtCmd.contains("atualizar")) {
+			Aluno a = new Aluno();
+
+			a.setId(Integer.parseInt(txtId));
+			a.setRa(txtRa);
+			a.setNome(txtNome);
+			a.setIdade(Integer.parseInt(txtIdade));
+			a.setSexo(txtSexo);
+
+			try {
+				aDao.atualizar(a);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			message = String.format("%s foi atualizado com sucesso.\n", a.toString());
+		} else if (txtCmd.contains(txtCmd)) {
+			Aluno a = new Aluno();
+
+			a.setId(Integer.parseInt(txtId));
+			a.setNome(txtNome);
+			a.setRa(txtRa);
+
+			try {
+				aDao.excluir(a);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			message = String.format("%s foi excluído com sucesso.\n", a.toString());
 		}
 
 		request.getSession().setAttribute("MESSAGE", message);
