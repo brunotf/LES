@@ -147,7 +147,7 @@ tr:nth-child(even) {
 			for (Aluno a : listaAlunos) {
 		%>
 		<tr>
-			<td><%=a.getId()%></td>
+			<td id="idTabela"><%=a.getId()%></td>
 			<td><%=a.getRa()%></td>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getIdade()%></td>

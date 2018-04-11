@@ -50,6 +50,8 @@ tr:nth-child(even) {
 		if (medicoAtual == null) {
 			medicoAtual = new Medico();
 		}
+
+		String esp = medicoAtual.getEspecialidade();
 	%>
 	<h1>Hospital B.O.</h1>
 	<hr />
@@ -100,16 +102,26 @@ tr:nth-child(even) {
 				</div>
 				<div class="col-sm-8">
 					<select type="text" name="txtEspecialidade" id="especialidade">
-						<option>Clínico Geral</option>
-						<option>Pediatra</option>
-						<option>Cardiologista</option>
-						<option>Neurologista</option>
-						<option>Ortopedista</option>
-						<option>Ginecologista</option>
-						<option>Urologista</option>
-						<option>Cirurgião</option>
-						<option>Nefrologista</option>
-						<option>Anestesista</option>
+						<option value="clinic"
+							<%=esp.equals("clinic") ? "selected=\"selected\"" : ""%>>Clínico Geral</option>
+						<option value="pedi"
+							<%=esp.equals("pedi") ? "selected=\"selected\"" : ""%>>Pediatra</option>
+						<option value="cardio"
+							<%=esp.equals("cardio") ? "selected=\"selected\"" : ""%>>Cardiologista</option>
+						<option value="neuro"
+							<%=esp.equals("neuro") ? "selected=\"selected\"" : ""%>>Neurologista</option>
+						<option value="orto"
+							<%=esp.equals("orto") ? "selected=\"selected\"" : ""%>>Ortopedista</option>
+						<option value="gine"
+							<%=esp.equals("gine") ? "selected=\"selected\"" : ""%>>Ginecologista</option>
+						<option value="uro"
+							<%=esp.equals("uro") ? "selected=\"selected\"" : ""%>>Urologista</option>
+						<option value="cirur"
+							<%=esp.equals("cirur") ? "selected=\"selected\"" : ""%>>Cirurgião</option>
+						<option value="nefro"
+							<%=esp.equals("nefro") ? "selected=\"selected\"" : ""%>>Nefrologista</option>
+						<option value="anest"
+							<%=esp.equals("anest") ? "selected=\"selected\"" : ""%>>Anestesista</option>
 					</select>
 				</div>
 			</div>

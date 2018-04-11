@@ -12,7 +12,7 @@ public interface MedicoDAO {
 
 	public void excluir(Medico m) throws SQLException;
 
-	public LinkedHashSet<Medico> pesquisar() throws SQLException;
+	public LinkedHashSet<Medico> pesquisar(String txtNome) throws SQLException;
 
 	public long proximoId() throws SQLException;
 	

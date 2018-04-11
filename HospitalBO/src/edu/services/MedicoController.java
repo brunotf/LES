@@ -86,7 +86,7 @@ public class MedicoController extends HttpServlet {
 		} else if ("pesquisar".equals(txtCmd)) {
 
 			try {
-				listaMedicos = mDao.pesquisar();
+				listaMedicos = mDao.pesquisar(txtNome);
 				request.getSession().setAttribute("LISTA_MEDICOS", listaMedicos);
 			} catch (SQLException e) {
 				e.printStackTrace();

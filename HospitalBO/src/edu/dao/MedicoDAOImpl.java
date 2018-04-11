@@ -56,10 +56,11 @@ public class MedicoDAOImpl implements MedicoDAO {
 	}
 
 	@Override
-	public LinkedHashSet<Medico> pesquisar() throws SQLException {
+	public LinkedHashSet<Medico> pesquisar(String txtNome) throws SQLException {
 		con = DBUtil.getInstance().getConnection();
-		String sql = "SELECT * FROM medico";
+		String sql = "SELECT * FROM medico WHERE nome like ?";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, "%" + txtNome + "%");
 		ResultSet rs = ps.executeQuery();
 		LinkedHashSet<Medico> lista = new LinkedHashSet<>(); 
 
