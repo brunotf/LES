@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="edu.model.Medico, java.text.SimpleDateFormat, java.util.LinkedHashSet"%>
+<%@ page
+	import="edu.model.Medico, java.text.SimpleDateFormat, java.util.LinkedHashSet"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -71,7 +72,7 @@ tr:nth-child(even) {
 					<label>ID</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtId" />
+					<input type="text" name="txtId" id="id" />
 				</div>
 			</div>
 
@@ -80,7 +81,7 @@ tr:nth-child(even) {
 					<label>Nome</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtNome" />
+					<input type="text" name="txtNome" id="nome" />
 				</div>
 			</div>
 
@@ -89,7 +90,7 @@ tr:nth-child(even) {
 					<label>CRM</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtCRM" />
+					<input type="text" name="txtCRM" id="crm" />
 				</div>
 			</div>
 
@@ -98,7 +99,7 @@ tr:nth-child(even) {
 					<label>Especialidade</label>
 				</div>
 				<div class="col-sm-8">
-					<select type="text" name="txtEspecialidade">
+					<select type="text" name="txtEspecialidade" id="especialidade">
 						<option>Clínico Geral</option>
 						<option>Pediatra</option>
 						<option>Cardiologista</option>
@@ -118,7 +119,7 @@ tr:nth-child(even) {
 					<label>Data de Admissão</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="Date" name="txtData" />
+					<input type="Date" name="txtData" id="data" />
 				</div>
 			</div>
 
@@ -127,9 +128,10 @@ tr:nth-child(even) {
 					<label>Turno</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="radio" name="txtTurno" value="Manhã" /> Manhã <input
-						type="radio" name="txtTurno" value="Tarde" /> Tarde <input
-						type="radio" name="txtTurno" value="Noite" /> Noite
+					<input type="radio" name="txtTurno" value="Manhã" id="manha" />
+					Manhã <input type="radio" name="txtTurno" value="Tarde" id="tarde" />
+					Tarde <input type="radio" name="txtTurno" value="Noite" id="noite" />
+					Noite
 				</div>
 			</div>
 
@@ -167,10 +169,10 @@ tr:nth-child(even) {
 		%>
 		<tr>
 			<th scope="row"><%=m.getId()%></th>
-			<td><%=m.getNome()%></td>
-			<td><%=m.getCrm()%></td>
-			<td><%=m.getEspecialidade()%></td>
-			<td><%=m.getTurno() %></td>
+			<td id="nomeTabela"><%=m.getNome()%></td>
+			<td id="crmTabela"><%=m.getCrm()%></td>
+			<td id="especialidadetabela"><%=m.getEspecialidade()%></td>
+			<td id="turnoTabela"><%=m.getTurno()%></td>
 		</tr>
 		<%
 			}
