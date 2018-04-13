@@ -103,7 +103,8 @@ tr:nth-child(even) {
 				<div class="col-sm-8">
 					<select type="text" name="txtEspecialidade" id="especialidade">
 						<option value="clinic"
-							<%=esp.equals("clinic") ? "selected=\"selected\"" : ""%>>Clínico Geral</option>
+							<%=esp.equals("clinic") ? "selected=\"selected\"" : ""%>>Clínico
+							Geral</option>
 						<option value="pedi"
 							<%=esp.equals("pedi") ? "selected=\"selected\"" : ""%>>Pediatra</option>
 						<option value="cardio"
@@ -168,7 +169,7 @@ tr:nth-child(even) {
 		if (listaMedicos != null && listaMedicos.size() > 0) {
 	%>
 	<h2>Lista dos médicos</h2>
-	<table class="table table-striped">
+	<table class="table table-striped" id="tabela">
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">Nome</th>
@@ -180,11 +181,11 @@ tr:nth-child(even) {
 			for (Medico m : listaMedicos) {
 		%>
 		<tr>
-			<th scope="row"><%=m.getId()%></th>
-			<td id="nomeTabela"><%=m.getNome()%></td>
-			<td id="crmTabela"><%=m.getCrm()%></td>
-			<td id="especialidadetabela"><%=m.getEspecialidade()%></td>
-			<td id="turnoTabela"><%=m.getTurno()%></td>
+			<th scope="row" onclick="pegarValor"><%=m.getId()%></th>
+			<td onclick="pegarValor"><%=m.getNome()%></td>
+			<td><%=m.getCrm()%></td>
+			<td><%=m.getEspecialidade()%></td>
+			<td><%=m.getTurno()%></td>
 		</tr>
 		<%
 			}
@@ -194,6 +195,19 @@ tr:nth-child(even) {
 	<%
 		}
 	%>
+
+	<script>
+		function pegarValor() {
+
+		    var medico = document.querySelectorAll("td");
+
+			
+			var i = 15;
+			
+			alert(i);
+		}
+	</script>
+
 
 </body>
 </html>
