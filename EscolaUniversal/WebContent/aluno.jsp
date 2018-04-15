@@ -72,7 +72,7 @@ tr:nth-child(even) {
 					<label>ID</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtId" />
+					<input type="text" name="txtId" id="id" />
 				</div>
 			</div>
 
@@ -81,7 +81,7 @@ tr:nth-child(even) {
 					<label>Nome</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtNome" />
+					<input type="text" name="txtNome" id="nome" />
 				</div>
 			</div>
 
@@ -90,7 +90,7 @@ tr:nth-child(even) {
 					<label>RA</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtRa" />
+					<input type="text" name="txtRa" id="ra" />
 				</div>
 			</div>
 
@@ -99,7 +99,7 @@ tr:nth-child(even) {
 					<label>Idade</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtIdade" />
+					<input type="text" name="txtIdade" id="idade" />
 				</div>
 			</div>
 
@@ -108,8 +108,9 @@ tr:nth-child(even) {
 					<label>Sexo</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="radio" name="txtSexo" value="Feminino" /> Feminino <input
-						type="radio" name="txtSexo" value="Masculino" /> Masculino
+					<input type="radio" name="txtSexo" value="Feminino" id="fem" />
+					Feminino <input type="radio" name="txtSexo" value="Masculino"
+						id="mas" /> Masculino
 				</div>
 			</div>
 
@@ -135,7 +136,7 @@ tr:nth-child(even) {
 		if (listaAlunos != null && listaAlunos.size() > 0) {
 	%>
 	<h2>Lista dos alunos</h2>
-	<table>
+	<table class="table table-striped" id="tabela">
 		<tr>
 			<th>ID</th>
 			<th>RA</th>
@@ -147,7 +148,7 @@ tr:nth-child(even) {
 			for (Aluno a : listaAlunos) {
 		%>
 		<tr>
-			<td id="idTabela"><%=a.getId()%></td>
+			<td><%=a.getId()%></td>
 			<td><%=a.getRa()%></td>
 			<td><%=a.getNome()%></td>
 			<td><%=a.getIdade()%></td>
@@ -162,5 +163,17 @@ tr:nth-child(even) {
 		}
 	%>
 
+	<script>
+		var tabela = document.getElementById('tabela');
+
+		for (var i = 1; i < tabela.rows.length; i++) {
+			tabela.rows[i].onclick = function() {
+				document.getElementById('id').value = this.cells[0].innerHTML;
+				document.getElementById('ra').value = this.cells[1].innerHTML;
+				document.getElementById('nome').value = this.cells[2].innerHTML;
+				document.getElementById('idade').value = this.cells[3].innerHTML;
+			};
+		}
+	</script>
 </body>
 </html>
