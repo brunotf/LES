@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="edu.model.Aluno, java.util.LinkedHashSet "%>
+<%@ page import="edu.model.Aluno, java.util.LinkedHashSet, edu.dao.ProxId "%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,14 +42,16 @@ tr:nth-child(even) {
 </STYLE>
 </head>
 
-<body>
+<body onload="limparCampos()">
 	<%
 		String msg = (String) session.getAttribute("MESSAGE");
 		Aluno alunoAtual = (Aluno) session.getAttribute("ALUNOS");
 		session.setAttribute("ALUNOS", null);
+		ProxId prox = new ProxId();
 		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		if (alunoAtual == null) {
 			alunoAtual = new Aluno();
+			alunoAtual.setId(prox.proximoId());
 		}
 	%>
 	<h1>Gestão de alunos</h1>
@@ -72,7 +74,8 @@ tr:nth-child(even) {
 					<label>ID</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtId" id="id" />
+					<input type="text" name="txtId" id="id"
+						value="<%=alunoAtual.getId()%>" />
 				</div>
 			</div>
 
@@ -81,7 +84,8 @@ tr:nth-child(even) {
 					<label>Nome</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtNome" id="nome" />
+					<input type="text" name="txtNome" id="nome"
+						value="<%=alunoAtual.getNome()%>" />
 				</div>
 			</div>
 
@@ -90,7 +94,8 @@ tr:nth-child(even) {
 					<label>RA</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtRa" id="ra" />
+					<input type="text" name="txtRa" id="ra"
+						value="<%=alunoAtual.getRa()%>" />
 				</div>
 			</div>
 
@@ -99,7 +104,8 @@ tr:nth-child(even) {
 					<label>Idade</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="text" name="txtIdade" id="idade" />
+					<input type="text" name="txtIdade" id="idade"
+						value="<%=alunoAtual.getIdade()%>" />
 				</div>
 			</div>
 
@@ -162,9 +168,16 @@ tr:nth-child(even) {
 	<%
 		}
 	%>
+	<script>
+	function limparCampos() {
+		document.getElementById('idade').value = "";
+	}
+	</script>
 
 	<script>
 		var tabela = document.getElementById('tabela');
+
+		var radios = document.getElementsByName('txtSexo');
 
 		for (var i = 1; i < tabela.rows.length; i++) {
 			tabela.rows[i].onclick = function() {
@@ -172,6 +185,12 @@ tr:nth-child(even) {
 				document.getElementById('ra').value = this.cells[1].innerHTML;
 				document.getElementById('nome').value = this.cells[2].innerHTML;
 				document.getElementById('idade').value = this.cells[3].innerHTML;
+
+				if (radios[0].value == this.cells[4].innerHTML) {
+					document.getElementById('fem').checked = true;
+				} else if (radios[1].value == this.cells[4].innerHTML) {
+					document.getElementById('mas').checked = true;
+				}
 			};
 		}
 	</script>

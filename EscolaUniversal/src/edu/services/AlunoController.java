@@ -14,35 +14,20 @@ import edu.dao.AlunoDAO;
 import edu.dao.AlunoDAOImpl;
 import edu.model.Aluno;
 
-/**
- * Servlet implementation class AlunoController
- */
 @WebServlet("/AlunoController")
 public class AlunoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public AlunoController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter()
 				.append("<html><body>Você deve acessar a página <a href=\"./aluno.jsp\">aluno.jsp</a></body></html>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -118,5 +103,4 @@ public class AlunoController extends HttpServlet {
 		response.sendRedirect("./aluno.jsp");
 
 	}
-
 }
