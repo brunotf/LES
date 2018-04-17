@@ -199,11 +199,10 @@ tr:nth-child(even) {
 	<script>
 		function pegarValor() {
 
-		    var medico = document.querySelectorAll("td");
+			var medico = document.querySelectorAll("td");
 
-			
 			var i = 15;
-			
+
 			alert(i);
 		}
 	</script>
