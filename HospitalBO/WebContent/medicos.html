@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Gestão de médicos</title>
+		<link rel="stylesheet" href="./resources/bootstrap.min.css"/>
+		<script src="./resources/jquery-3.3.1.js"></script>
+		<script src="./resources/popper.min.js" ></script>
+		<script src="./resources/bootstrap.min.js"></script>
+		<script>
+			function adicionar() {
+				// var id = document.getElementById("txtId");
+				var query = {};
+				query['id'] = parseInt($("#txtId").val());
+				query['crm'] = $("#txtCRM").val();
+				query['nome'] = $("#txtNome").val();
+				query['especialidade'] = $("#txtEspecialidade").val();
+				query['dtAdmissao'] = $("#txtData").val();
+				
+				var strQuery = JSON.stringify( query );
+
+				console.log( strQuery );
+
+				var callback = function(e) { 
+					console.log("metodo invocado");
+					console.log(e);
+				}
+				
+/* 				var xhttp = new XMLHttpRequest();
+				xhttp.open("POST", "./MedicoControllerREST", false);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(strQuery);  */
+				$.ajax({
+			        		type: 'POST',
+			        		contentType : 'application/json',
+			        		headers : {},
+			        		url: './MedicoControllerREST',
+			        		data: strQuery
+			    }).fail(function( response ) {
+			        console.log("Falha na chamada ao serviço");
+			        console.log( response );
+			    })
+			    .done(function( response ) {
+			        console.log("Serviço requisitado com sucesso");
+			        console.log( response );
+			    });
+
+			}
+		</script>		
+	</head>
+<body>
+	<h2>Gestão de Médicos</h2>
+	<div class="container">
+		<form action="./MedicoControllerREST" method="post">
+			<div class="row">
+	  				<div class="col-sm-4">
+					<label>Id</label>
+				</div>
+				<div class="col-sm-8">
+					<input id="txtId" type="text" name="txtId" />
+				</div>
+			</div>
+			<div class="row">
+	  				<div class="col-sm-4">
+					<label>Nome</label>
+				</div>
+				<div class="col-sm-8">
+					<input id="txtNome" type="text" name="txtNome"/>
+				</div>
+			</div>
+			<div class="row">
+	  				<div class="col-sm-4">
+					<label>CRM</label>
+				</div>
+				<div class="col-sm-8">
+					<input id="txtCRM" type="text" name="txtCRM"/>
+				</div>
+			</div>
+			<div class="row">
+	  				<div class="col-sm-4">
+					<label>Especialidade</label>
+				</div>
+				<div class="col-sm-8">
+					<select id="txtEspecialidade" type="text" name="txtEspecialidade">
+						<option value="clinic">Clinico Geral</option>
+						<option value="pedi">Pediatra</option>
+						<option value="cardio">Cardiologista</option>
+						<option value="neuro">Neurologista</option>
+						<option value="orto">Ortopedista</option>
+						<option value="gineco">Ginecologista</option>
+						<option value="uro">Urologista</option>
+						<option value="ciru">Cirurgião</option>
+						<option value="nefro">Nefrologista</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+	  				<div class="col-sm-4">									
+					<label>Data Admissão</label>
+				</div>
+				<div class="col-sm-8">
+					<input id="txtData" type="date" name="txtData"/>
+				</div>
+			</div>
+			<div class="row">
+	  				<div class="col-sm-4">				
+					<label>Turno</label>
+				</div>
+				<div class="col-sm-8">
+					<input type="radio" name="txtTurno" value="manha">Manhã</input>			
+					<input type="radio" name="txtTurno" value="tarde">Tarde</input>
+					<input type="radio" name="txtTurno" value="noite">Noite</input>
+				</div>
+			</div>
+			<div class="row">
+  				<div class="col-sm-4">
+  					<button class="btn btn-primary" type="button" onclick="adicionar();" name="cmd" value="adicionar">Adicionar</button>
+  					<button class="btn btn-primary" type="submit" name="cmd" value="pesquisar">Pesquisar</button>
+  				</div>
+  			</div>
+		</form>
+	</div>
+</body>
+</html>
