@@ -8,16 +8,16 @@ import javax.swing.JOptionPane;
 
 public class DBUtil {
 
-	private final static String USERNAME = "Huesil667";
-	private final static String PASSWORD = "Ab246813579cD";
-	private final static String URLDB = "jdbc:jtds:sqlserver://huesil.database.windows.net/bedezera;namedPipes=true";
+	private final static String USERNAME = "root";
+	private final static String PASSWORD = "";
+	private final static String URLDB = "jdbc:mysql://localhost:3306/escola";
 	private static DBUtil instancia;
 	private Connection con;
 
 	private DBUtil() {
 
 		try {
-			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(URLDB, USERNAME, PASSWORD);
 		} catch (ClassNotFoundException | SQLException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -33,5 +33,5 @@ public class DBUtil {
 	public Connection getConnection() {
 		return con;
 	}
-	
+
 }

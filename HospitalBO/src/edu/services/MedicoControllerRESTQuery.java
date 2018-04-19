@@ -64,7 +64,7 @@ public class MedicoControllerRESTQuery extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			Thread.sleep(300);
+			Thread.sleep(333);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
