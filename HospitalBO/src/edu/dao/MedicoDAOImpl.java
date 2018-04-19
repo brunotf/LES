@@ -39,7 +39,8 @@ public class MedicoDAOImpl implements MedicoDAO {
 	public void atualizar(Medico m) {
 		try {
 			con = DBUtil.getInstance().getConnection();
-			String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, " + "turno = ? WHERE id = ?";
+			String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, turno = ?"
+					+ " WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, m.getNome());
 			ps.setString(2, m.getEspecialidade());

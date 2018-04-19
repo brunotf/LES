@@ -20,6 +20,7 @@
 		query['nome'] = $("#txtNome").val();
 		query['especialidade'] = $("#txtEspecialidade").val();
 		query['dtAdmissao'] = $("#txtData").val();
+		query['turno'] = $("#txtTurno").val();
 
 		var strQuery = JSON.stringify(query);
 
@@ -49,7 +50,7 @@
 		});
 
 	}
-
+	
 	function pesquisar() {
 		var query = {};
 		query['nome'] = $("#txtNome").val();
@@ -73,7 +74,6 @@
 			var obj = JSON.parse(response);
 			$('#tabela').DataTable({
 				data : obj,
-				destroy : true,
 				columns : [ {
 					data : "id",
 					title : "Id"
@@ -97,9 +97,15 @@
 
 		});
 	}
+
+	function limparCampos() {
+		document.getElementById('id').value = "";
+		document.getElementById('nome').value = "";
+		document.getElementById('crm').value = "";
+	}
 </script>
 </head>
-<body>
+<body onload="limparCampos()">
 	<h2>Gestão de Médicos</h2>
 	<div class="container">
 		<form action="./MedicoControllerREST" method="post">
@@ -158,9 +164,9 @@
 					<label>Turno</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="radio" name="txtTurno" value="Manhã">Manhã</input> <input
-						type="radio" name="txtTurno" value="Tarde">Tarde</input> <input
-						type="radio" name="txtTurno" value="Noite">Noite</input>
+					<input type="radio" name="txtTurno" value="Manhã" /> Manhã 
+					<input type="radio" name="txtTurno" value="Tarde" /> Tarde
+					<input type="radio" name="txtTurno" value="Noite" /> Noite
 				</div>
 			</div>
 			<div class="row">

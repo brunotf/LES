@@ -79,7 +79,7 @@ public class MedicoControllerREST extends HttpServlet {
 		ObjectMapper objectMapper = new ObjectMapper();
 		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
 		objectMapper.setDateFormat( dtf );
-		Medico m = objectMapper.readValue(body, Medico.class);  
+		Medico m = objectMapper.readValue(body, Medico.class); 
 		
 		MedicoDAO mDao = new MedicoDAOImpl();
 		mDao.adicionar(m);
