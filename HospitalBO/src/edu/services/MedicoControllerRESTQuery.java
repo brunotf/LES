@@ -2,8 +2,8 @@ package edu.services;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.dao.MedicoDAO;
 import edu.dao.MedicoDAOImpl;
 import edu.model.Medico;
 
-@WebServlet("/MedicoControllerREST")
-public class MedicoControllerREST extends HttpServlet {
+@WebServlet("/MedicoControllerRESTQuery")
+public class MedicoControllerRESTQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final long TIMEOUT = 2000;
 
-    public MedicoControllerREST() {
+    public MedicoControllerRESTQuery() {
         super();
     }
     
@@ -62,12 +63,9 @@ public class MedicoControllerREST extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		printParameters(request);
-//		printHeaders(request);
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String body = retrieveBody(request, 3000);
@@ -77,20 +75,24 @@ public class MedicoControllerREST extends HttpServlet {
 		
 		System.out.println("Converting json to Medico Entity");
 		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JsonNode node = objectMapper.readTree( body );
+		String nome = node.get("nome").asText();
+
+		
 		SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
 		objectMapper.setDateFormat( dtf );
-		Medico m = objectMapper.readValue(body, Medico.class);  
 		
 		MedicoDAO mDao = new MedicoDAOImpl();
-		mDao.adicionar(m);
+		LinkedHashSet<Medico> medicos = mDao.pesquisar(nome);
+		
+		System.out.printf("Encontrados %d medicos\n", medicos.size());
+		String listaJson = objectMapper.writeValueAsString(medicos);
+		System.out.println("JSON Gerado : " + listaJson);
 		
 		response.setStatus(200);
 		response.setStatus(HttpServletResponse.SC_OK);
-//		response.addHeader("Access-Control-Allow-Origin",  "*");
-//	    response.addHeader("Access-Control-Allow-Credentials", "true");
-//	    response.addHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//	    response.addHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin, Access-Control-Allow-Methods");
-		response.getWriter().println("Finalizado");
+		response.getWriter().println(listaJson);
 		response.getWriter().flush();	    
 	}
 
