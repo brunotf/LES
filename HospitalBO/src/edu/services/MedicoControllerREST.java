@@ -72,7 +72,7 @@ public class MedicoControllerREST extends HttpServlet {
 		}
 		String body = retrieveBody(request, 3000);
 		
-		System.out.println( "Leitura terminada");
+		System.out.println( "Leitura terminada" );
 		System.out.println( body );
 		
 		System.out.println("Converting json to Medico Entity");

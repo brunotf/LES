@@ -31,7 +31,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace(System.err);
 		}
 	}
 
@@ -39,8 +39,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 	public void atualizar(Medico m) {
 		try {
 			con = DBUtil.getInstance().getConnection();
-			String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, turno = ?"
-					+ " WHERE id = ?";
+			String sql = "UPDATE medico SET nome = ?, especialidade = ?, dtAdmissao = ?, turno = ?" + " WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, m.getNome());
 			ps.setString(2, m.getEspecialidade());
@@ -50,7 +49,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace(System.err);
 		}
 	}
 
@@ -64,7 +63,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace(System.err);
 		}
 	}
 
@@ -90,7 +89,7 @@ public class MedicoDAOImpl implements MedicoDAO {
 				lista.add(m);
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace(System.err);
 		}
 		return lista;
 	}

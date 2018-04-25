@@ -20,7 +20,7 @@ public class DBUtil {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(URLDB, USERNAME, PASSWORD);
 		} catch (ClassNotFoundException | SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace(System.err);
 		}
 	}
 

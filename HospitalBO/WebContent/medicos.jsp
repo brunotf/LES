@@ -12,9 +12,7 @@
 <script src="./resources/jquery-3.3.1.js"></script>
 <script src="./resources/popper.min.js"></script>
 <script src="./resources/bootstrap.min.js"></script>
-<script>
-</head>
-<STYLE>
+<style>
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
@@ -30,7 +28,8 @@ td, th {
 tr:nth-child(even) {
 	background-color: #dddddd;
 }
-</STYLE>
+</style>
+</head>
 <body>
 	<%
 		String msg = (String) session.getAttribute("MESSAGE");
@@ -167,8 +166,8 @@ tr:nth-child(even) {
 		</tr>
 		<%for (Medico m : listaMedicos) {%>
 		<tr>
-			<th scope="row" onclick="pegarValor"><%=m.getId()%></th>
-			<td onclick="pegarValor"><%=m.getNome()%></td>
+			<th scope="row"><%=m.getId()%></th>
+			<td><%=m.getNome()%></td>
 			<td><%=m.getCrm()%></td>
 			<td><%=m.getEspecialidade()%></td>
 			<td><%=m.getTurno()%></td>
@@ -178,15 +177,5 @@ tr:nth-child(even) {
 	</table>
 	<%}%>
 
-	<script>
-		function pegarValor() {
-
-			var medico = document.querySelectorAll("td");
-
-			var i = 15;
-
-			alert(i);
-		}
-	</script>
 </body>
 </html>

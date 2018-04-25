@@ -51,7 +51,7 @@ tr:nth-child(even) {
 		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		if (alunoAtual == null) {
 			alunoAtual = new Aluno();
-			alunoAtual.setId(prox.proximoId());
+		//	alunoAtual.setId(prox.proximoId());
 		}
 	%>
 	<h1>Gestão de alunos</h1>
