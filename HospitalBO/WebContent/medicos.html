@@ -13,7 +13,6 @@
 <script type="text/javascript" src="./resources/datatables.min.js"></script>
 <script>
 	function adicionar() {
-		// var id = document.getElementById("txtId");
 		var query = {};
 		query['id'] = parseInt($("#txtId").val());
 		query['crm'] = $("#txtCRM").val();
@@ -31,10 +30,6 @@
 			console.log(e);
 		}
 
-		/* 				var xhttp = new XMLHttpRequest();
-		 xhttp.open("POST", "./MedicoControllerREST", false);
-		 xhttp.setRequestHeader("Content-type", "application/json");
-		 xhttp.send(strQuery);  */
 		$.ajax({
 			type : 'POST',
 			contentType : 'application/json',
@@ -50,7 +45,7 @@
 		});
 
 	}
-	
+
 	function pesquisar() {
 		var query = {};
 		query['nome'] = $("#txtNome").val();
@@ -104,35 +99,35 @@
 	<div class="container">
 		<form action="./MedicoControllerREST" method="post">
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>Id</label>
 				</div>
 				<div class="col-sm-8">
-					<input id="txtId" type="text" name="txtId" placeholder="Número de ID"/>
+					<input id="txtId" type="text" name="txtId" placeholder="Número de ID" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>Nome</label>
 				</div>
 				<div class="col-sm-8">
-					<input id="txtNome" type="text" name="txtNome" placeholder="Nome do médico"/>
+					<input id="txtNome" type="text" name="txtNome" placeholder="Nome do médico" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>CRM</label>
 				</div>
 				<div class="col-sm-8">
-					<input id="txtCRM" type="text" name="txtCRM" placeholder="Número CRM"/>
+					<input id="txtCRM" type="text" name="txtCRM" placeholder="Número CRM" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>Especialidade</label>
 				</div>
 				<div class="col-sm-8">
-					<select id="txtEspecialidade" type="text" name="txtEspecialidade" >
+					<select id="txtEspecialidade" type="text" name="txtEspecialidade">
 						<option value="clinic">Clinico Geral</option>
 						<option value="pedi">Pediatra</option>
 						<option value="cardio">Cardiologista</option>
@@ -146,7 +141,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>Data Admissão</label>
 				</div>
 				<div class="col-sm-8">
@@ -154,19 +149,21 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 text-right" >
+				<div class="col-sm-4 text-right">
 					<label>Turno</label>
 				</div>
 				<div class="col-sm-8">
-					<input type="radio" name="txtTurno" value="Manha" /> Manhã 
-					<input type="radio" name="txtTurno" value="Tarde" /> Tarde
-					<input type="radio" name="txtTurno" value="Noite" /> Noite
+					<input type="radio" name="txtTurno" value="Manha" /> Manhã <input
+						type="radio" name="txtTurno" value="Tarde" /> Tarde <input
+						type="radio" name="txtTurno" value="Noite" /> Noite
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-10 text-center" >
-					<button class="btn btn-primary" type="button" onclick="adicionar()" name="cmd" value="adicionar">Adicionar</button>
-					<button class="btn btn-primary" type="button" onclick="pesquisar()"	name="cmd" value="pesquisar">Pesquisar</button>
+				<div class="col-sm-10 text-center">
+					<button class="btn btn-primary" type="button" onclick="adicionar()"
+						name="cmd" value="adicionar">Adicionar</button>
+					<button class="btn btn-primary" type="button" onclick="pesquisar()"
+						name="cmd" value="pesquisar">Pesquisar</button>
 				</div>
 			</div>
 		</form>
@@ -175,7 +172,7 @@
 	<div class="table table-striped">
 		<table id="tabela"></table>
 	</div>
-	
+
 	<script>
 		function limparCampos() {
 			document.getElementById("txtId").value = "";

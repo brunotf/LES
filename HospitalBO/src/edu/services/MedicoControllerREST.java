@@ -67,8 +67,7 @@ public class MedicoControllerREST extends HttpServlet {
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(System.err);
 		}
 		String body = retrieveBody(request, 3000);
 		

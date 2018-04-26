@@ -1,16 +1,14 @@
-package edu.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
-
 public class DBUtil {
 
 	private final static String USERNAME = "root";
 	private final static String PASSWORD = "";
-	private final static String URLDB = "jdbc:mysql://localhost:3306/hospital";
+	private final static String URLDB = "jdbc:mysql://localhost:3306/ListaJogo";
 	private static DBUtil instancia;
 	private Connection con;
 
