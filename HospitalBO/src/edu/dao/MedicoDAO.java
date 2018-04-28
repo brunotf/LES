@@ -2,7 +2,6 @@ package edu.dao;
 
 import edu.model.Medico;
 
-import java.sql.SQLException;
 import java.util.LinkedHashSet;
 
 public interface MedicoDAO {
@@ -14,6 +13,6 @@ public interface MedicoDAO {
 
 	public LinkedHashSet<Medico> pesquisar(String txtNome);
 
-	public long proximoId() throws SQLException;
+	public long proximoId();
 	
 }

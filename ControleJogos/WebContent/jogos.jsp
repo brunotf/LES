@@ -79,7 +79,7 @@ tr:nth-child(even) {
 					<label>Dificuldade</label>
 				</div>
 				<div class="col-sm-8">
-					<select type="text" name="txtDificuldade" id="dificuldade">
+					<select class="form-control" type="text" name="txtDificuldade" id="dificuldade">
 						<option value="Nutella" >Nutella</option>
 						<option value="Fácil" >Fácil</option>
 						<option value="Médio" >Médio</option>
@@ -101,6 +101,7 @@ tr:nth-child(even) {
 	<hr />
 	
 	<%
+		@SuppressWarnings("unchecked")
 		LinkedList<Jogo> listaJogo = (LinkedList<Jogo>) session.getAttribute("LISTAJOGO");
 		session.setAttribute("LISTAJOGO", null);
 		if (listaJogo != null && listaJogo.size() > 0) {

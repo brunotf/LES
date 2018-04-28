@@ -1,7 +1,6 @@
 package edu.services;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.LinkedHashSet;
 
 import javax.servlet.ServletException;
@@ -32,10 +31,15 @@ public class MedicoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String txtId = request.getParameter("txtId");
+		
 		String txtNome = request.getParameter("txtNome");
+		
 		String txtCRM = request.getParameter("txtCRM");
+		
 		String txtData = request.getParameter("txtData");
+		
 		String txtEspecialidade = request.getParameter("txtEspecialidade");
+		
 		String txtTurno = request.getParameter("txtTurno");
 
 		String txtCmd = request.getParameter("cmd");
@@ -61,13 +65,12 @@ public class MedicoController extends HttpServlet {
 			m.setDtAdmissao(txtData);
 			
 			mDao.adicionar(m);
+			
 			message = String.format("Foi cadastrado o médico %s\n", m.toString());
-
 		} else if ("pesquisar".equals(txtCmd)) {
 			listaMedicos = mDao.pesquisar(txtNome);
 			
 			request.getSession().setAttribute("LISTA_MEDICOS", listaMedicos);
-
 		} else if ("excluir".equals(txtCmd)) {
 			Medico m = new Medico();
 
@@ -79,7 +82,6 @@ public class MedicoController extends HttpServlet {
 
 			message = String.format("Foi excluído o médico %s\n", m.toString());
 		} else if ("atualizar".equals(txtCmd)) {
-
 			Medico m = new Medico();
 
 			m.setId(Long.parseLong(txtId));
@@ -93,9 +95,7 @@ public class MedicoController extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("MESSAGE", message);
-
 		response.sendRedirect("./medicos.jsp");
 
 	}
-
 }

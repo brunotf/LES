@@ -19,7 +19,7 @@
 		query['nome'] = $("#txtNome").val();
 		query['especialidade'] = $("#txtEspecialidade").val();
 		query['dtAdmissao'] = $("#txtData").val();
-		query['turno'] = $("#txtTurno").val();
+		query['turno'] = $("input[name='txtTurno']:checked").val();
 
 		var strQuery = JSON.stringify(query);
 

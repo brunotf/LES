@@ -2,9 +2,7 @@ package modelo;
 
 public class Jogo {
 	private int id;
-
 	private String titulo;
-
 	private String dificuldade;
 
 	public int getId() {

@@ -27,10 +27,12 @@ public class JogosController extends HttpServlet {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		String txtId = request.getParameter("txtId");
+		
 		String txtTitulo = request.getParameter("txtTitulo");
+		
 		String txtDificuldade = request.getParameter("txtDificuldade");
 
 		String cmd = request.getParameter("cmd");
@@ -49,11 +51,11 @@ public class JogosController extends HttpServlet {
 
 		if ("adicionar".equals(cmd)) {
 			Jogo j = new Jogo();
-
+			
 			j.setId(Integer.parseInt(txtId));
 			j.setTitulo(txtTitulo);
 			j.setDificuldade(txtDificuldade);
-
+			
 			jDao.adicionar(j);
 			message = String.format("Foi adicionado o jogo %s\n", j.toString());
 		} else if ("pesquisar".equals(cmd)) {
@@ -65,5 +67,4 @@ public class JogosController extends HttpServlet {
 
 		response.sendRedirect("./jogos.jsp");
 	}
-
 }

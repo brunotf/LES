@@ -1,17 +1,15 @@
 package edu.dao;
 
-import java.sql.SQLException;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 import edu.model.Aluno;
 
 public interface AlunoDAO {
+	public void adicionar(Aluno a);
 
-	public void adicionar(Aluno a) throws SQLException;
+	public LinkedList<Aluno> pesquisar();
 
-	public LinkedHashSet<Aluno> pesquisar() throws SQLException;
+	public void atualizar(Aluno a);
 
-	public void atualizar(Aluno a) throws SQLException;
-
-	public void excluir(Aluno a) throws SQLException;
+	public void excluir(Aluno a);
 }

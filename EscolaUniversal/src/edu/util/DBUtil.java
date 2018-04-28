@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
-
 public class DBUtil {
-
 	private final static String USERNAME = "root";
 	private final static String PASSWORD = "";
 	private final static String URLDB = "jdbc:mysql://localhost:3306/escola";
@@ -15,7 +12,6 @@ public class DBUtil {
 	private Connection con;
 
 	private DBUtil() {
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(URLDB, USERNAME, PASSWORD);
@@ -34,5 +30,4 @@ public class DBUtil {
 	public Connection getConnection() {
 		return con;
 	}
-
 }

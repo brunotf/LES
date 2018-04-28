@@ -1,8 +1,7 @@
 package edu.services;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +30,14 @@ public class AlunoController extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String txtId = request.getParameter("txtId");
+		
 		String txtRa = request.getParameter("txtRa");
+		
 		String txtNome = request.getParameter("txtNome");
+		
 		String txtIdade = request.getParameter("txtIdade");
+		
 		String txtSexo = request.getParameter("txtSexo");
 
 		String txtCmd = request.getParameter("cmd");
@@ -43,7 +45,7 @@ public class AlunoController extends HttpServlet {
 		AlunoDAO aDao = new AlunoDAOImpl();
 
 		String message = null;
-		LinkedHashSet<Aluno> listaAlunos = (LinkedHashSet<Aluno>) getServletContext().getAttribute("LISTA_ALUNOS");
+		LinkedList<Aluno> listaAlunos = (LinkedList<Aluno>) getServletContext().getAttribute("LISTA_ALUNOS");
 
 		if (txtCmd.contains("adicionar")) {
 			Aluno a = new Aluno();
@@ -54,20 +56,13 @@ public class AlunoController extends HttpServlet {
 			a.setIdade(Integer.parseInt(txtIdade));
 			a.setSexo(txtSexo);
 
-			try {
-				aDao.adicionar(a);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			aDao.adicionar(a);
+			
 			message = String.format("%s foi cadastrado com sucesso.\n", a.toString());
-
 		} else if (txtCmd.contains("pesquisar")) {
-			try {
-				listaAlunos = aDao.pesquisar();
-				request.getSession().setAttribute("LISTA_ALUNOS", listaAlunos);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			listaAlunos = aDao.pesquisar();
+			
+			request.getSession().setAttribute("LISTA_ALUNOS", listaAlunos);
 		} else if (txtCmd.contains("atualizar")) {
 			Aluno a = new Aluno();
 
@@ -77,11 +72,8 @@ public class AlunoController extends HttpServlet {
 			a.setIdade(Integer.parseInt(txtIdade));
 			a.setSexo(txtSexo);
 
-			try {
-				aDao.atualizar(a);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			aDao.atualizar(a);
+
 			message = String.format("%s foi atualizado com sucesso.\n", a.toString());
 		} else if (txtCmd.contains(txtCmd)) {
 			Aluno a = new Aluno();
@@ -90,11 +82,8 @@ public class AlunoController extends HttpServlet {
 			a.setNome(txtNome);
 			a.setRa(txtRa);
 
-			try {
-				aDao.excluir(a);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			aDao.excluir(a);
+
 			message = String.format("%s foi excluído com sucesso.\n", a.toString());
 		}
 

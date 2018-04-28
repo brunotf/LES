@@ -14,9 +14,11 @@ public class JogoDAOImpl implements JogoDAO {
 
 	@Override
 	public void adicionar(Jogo j) {
+		con = DBUtil.getInstance().getConnection();
+		
+		String sql = "INSERT INTO jogo(id, titulo, dificuldade) VALUES(?, ?, ?)";
+		
 		try {
-			con = DBUtil.getInstance().getConnection();
-			String sql = "INSERT INTO jogo(id, titulo, dificuldade) VALUES(?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, j.getId());
 			ps.setString(2, j.getTitulo());
@@ -31,9 +33,12 @@ public class JogoDAOImpl implements JogoDAO {
 	@Override
 	public LinkedList<Jogo> pesquisar(String titulo) {
 		LinkedList<Jogo> lista = new LinkedList<>();
+		
+		con = DBUtil.getInstance().getConnection();
+		
+		String sql = "SELECT * FROM jogo WHERE titulo LIKE ?";
+		
 		try {
-			con = DBUtil.getInstance().getConnection();
-			String sql = "SELECT * FROM jogo WHERE titulo LIKE ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, "%" + titulo + "%");
 			ResultSet rs = ps.executeQuery();
@@ -51,5 +56,5 @@ public class JogoDAOImpl implements JogoDAO {
 		}
 		return lista;
 	}
-	
+
 }

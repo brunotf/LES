@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="edu.model.Aluno, java.util.LinkedHashSet, edu.dao.ProxId "%>
+<%@ page import="edu.model.Aluno, java.util.LinkedList, edu.dao.ProxId "%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -137,7 +137,7 @@ tr:nth-child(even) {
 	</div>
 
 	<%
-		LinkedHashSet<Aluno> listaAlunos = (LinkedHashSet<Aluno>) session.getAttribute("LISTA_ALUNOS");
+		LinkedList<Aluno> listaAlunos = (LinkedList<Aluno>) session.getAttribute("LISTA_ALUNOS");
 		session.setAttribute("LISTA_ALUNOS", null);
 		if (listaAlunos != null && listaAlunos.size() > 0) {
 	%>

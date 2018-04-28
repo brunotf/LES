@@ -3,20 +3,11 @@ package edu.model;
 import java.io.Serializable;
 
 public class Aluno implements Serializable {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7986838444753566168L;
-
 	private int id;
-	
-	private String ra = "";
-	
-	private String nome = "";
-	
+	private String ra;
+	private String nome;
 	private int idade;
-	
 	private String sexo;
 
 	public int getId() {
@@ -58,15 +49,14 @@ public class Aluno implements Serializable {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		
+
 		sb.append("Aluno: " + getNome() + " - ");
-		sb.append("RA: " + getRa() +  " ");
-		
+		sb.append("RA: " + getRa() + '\n');
+
 		return sb.toString();
 	}
-
 }
