@@ -8,16 +8,23 @@
 	<title>PetShop Son</title>
 </h:head>
 <h:body>
+	<h:messages showSummary="true" tooltip="true" />
 	<h:form>
-		<h:panelGrid>
+		<h:panelGrid columns="2">
 			<h:outputText value="ID" />
 			<h:inputText value="#{animalMB.animal.id}" />
+
 			<h:outputText value="Nome" />
 			<h:inputText value="#{animalMB.animal.nome}" />
+
 			<h:outputText value="Nascimento" />
-			<h:inputText value="#{animalMB.animal.nascimento}" />
+			<h:inputText value="#{animalMB.animal.nascimento}">
+				<f:convertDateTime>"dd/MM/yyyy"</f:convertDateTime>
+			</h:inputText>
+
 			<h:outputText value="Peso" />
 			<h:inputText value="#{animalMB.animal.peso}" />
+
 			<h:panelGroup>
 				<h:commandButton value="Adicionar" action="#{animalMB.adicionar}" />
 				<h:commandButton value="Cancelar" />

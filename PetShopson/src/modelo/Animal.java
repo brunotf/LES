@@ -45,7 +45,7 @@ public class Animal implements Serializable {
 
 	@Override
 	public String toString() {
-		return nome;
+		return id + " " + nome;
 	}
 
 }

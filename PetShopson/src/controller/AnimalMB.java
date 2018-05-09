@@ -2,8 +2,10 @@ package controller;
 
 import java.util.LinkedList;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import modelo.Animal;
 
@@ -12,7 +14,7 @@ import modelo.Animal;
 public class AnimalMB {
 
 	private LinkedList<Animal> lista = new LinkedList<>();
-	private Animal animal;;
+	private Animal animal = new Animal();
 
 	public LinkedList<Animal> getLista() {
 		return lista;
@@ -30,10 +32,11 @@ public class AnimalMB {
 		this.animal = animal;
 	}
 
-	public String adicionar() {
-		System.out.println("Seu animal foi adicionado com sucessi" + animal.toString());
+	public void adicionar() {
 		lista.add(animal);
-		return null;
+		FacesMessage msg = new FacesMessage("Animal adicionado.", "O animal " + animal.getNome() + " foi adicionado.");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		animal = new Animal();
 	}
 
 }
