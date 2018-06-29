@@ -16,54 +16,71 @@ import modelo.Jogo;
 @WebServlet("/JogosController")
 public class JogosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	public JogosController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		String txtId = request.getParameter("txtId");
-		
-		String txtTitulo = request.getParameter("txtTitulo");
-		
-		String txtDificuldade = request.getParameter("txtDificuldade");
 
 		String cmd = request.getParameter("cmd");
 
-		JogoDAO jDao = new JogoDAOImpl();
+		if ("adicionar".equals(cmd)) {
+			adicionar(request, response);
 
-		LinkedList<Jogo> listaJogo;
+		} else if ("pesquisar".equals(cmd)) {
+			pesquisar(request, response);
+		}
+	}
+
+	private void adicionar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String txtId = request.getParameter("txtId");
+		String txtTitulo = request.getParameter("txtTitulo");
+		String txtDificuldade = request.getParameter("txtDificuldade");
+
+		String message = null;
+
+		Jogo jogo = new Jogo();
+
+		JogoDAO dao = new JogoDAOImpl();
+
+		jogo.setId(Integer.parseInt(txtId));
+		jogo.setTitulo(txtTitulo);
+		jogo.setDificuldade(txtDificuldade);
+
+		dao.adicionar(jogo);
+		
+		message = String.format("Foi adicionado o jogo %s\n", jogo.toString());
+
+		request.getSession().setAttribute("MESSAGE", message);
+
+		response.sendRedirect("./jogos.jsp");
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void pesquisar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String txtTitulo = request.getParameter("txtTitulo");
+
+		JogoDAO dao = new JogoDAOImpl();
+		
+		LinkedList<Jogo> listaJogo = new LinkedList<>();
 
 		listaJogo = (LinkedList<Jogo>) getServletContext().getAttribute("LISTAJOGO");
+	
 
 		if (listaJogo == null) {
 			listaJogo = new LinkedList<>();
 		}
+		
+		listaJogo = dao.pesquisar(txtTitulo);
 
-		String message = null;
-
-		if ("adicionar".equals(cmd)) {
-			Jogo j = new Jogo();
-			
-			j.setId(Integer.parseInt(txtId));
-			j.setTitulo(txtTitulo);
-			j.setDificuldade(txtDificuldade);
-			
-			jDao.adicionar(j);
-			message = String.format("Foi adicionado o jogo %s\n", j.toString());
-		} else if ("pesquisar".equals(cmd)) {
-			listaJogo = jDao.pesquisar(txtTitulo);
-			request.getSession().setAttribute("LISTAJOGO", listaJogo);
-		}
-
-		request.getSession().setAttribute("MESSAGE", message);
+		request.getSession().setAttribute("LISTAJOGO", listaJogo);
 
 		response.sendRedirect("./jogos.jsp");
 	}

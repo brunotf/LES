@@ -7,28 +7,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Controle de jogos</title>
 <link rel="stylesheet" href="./resources/bootstrap.min.css" />
+<link rel="stylesheet" href="./resources/estilo.css" />
 <script src="./resources/jquery-3.3.1.js"></script>
 <script src="./resources/popper.min.js"></script>
 <script src="./resources/bootstrap.min.js"></script>
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	border: 1px solid #dddddd;
-	text-align: center;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
+<script>
+	$(function(){
+		$('#id').val = ""
+		$('#titulo').val = ""
+		$('#dificuldade').val = ""
+		
+	});
+</script>
 </head>
-<body onload="limparCampos()">
+<body>
 	<%
 		String msg = (String) session.getAttribute("MESSAGE");
 		Jogo jogoAtual = (Jogo) session.getAttribute("JOGOATUAL");
@@ -38,7 +30,7 @@ tr:nth-child(even) {
 			jogoAtual = new Jogo();
 		}
 		
-		String dif = jogoAtual.getDificuldade();
+		String dificuldade = jogoAtual.getDificuldade();
 	%>
 	<h1>Lista de Jogos Raíz</h1>
 	<hr />
@@ -158,12 +150,7 @@ tr:nth-child(even) {
 				}
 			};
 		}
-		
-		function limparCampos() {
-			document.getElementById('id').value = ""
-			document.getElementById('titulo').value = ""
-			document.getElementById('diciuldade').value = ""
-		}
+
 	</script>
 </body>
 </html>
